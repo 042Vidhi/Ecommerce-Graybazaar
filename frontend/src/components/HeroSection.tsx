@@ -31,8 +31,12 @@ export default function HeroSection() {
             </div>
             <div className="column ">
                 <div className="buttons flex flex-col justify-center items-center gap-3 border-[1px] border-slate-300 p-4 rounded-lg">
-                    <button className="button bg-slate-800 rounded-full w-full py-3">Shop Now</button>
-                    <button className="button bg-blue-200 text-slate-500 rounded-full w-full py-3">Explore more</button>
+                    <button className="button bg-slate-800 rounded-full text-white w-full py-3"
+                    onClick={() => {window.location.href='/products'}}
+                    >Shop Now</button>
+                    <button className="button bg-blue-200 text-slate-500 rounded-full w-full py-3"
+                    onClick={() => {window.location.href='/products'}}
+                    >Explore more</button>
                 </div>
                 <Image src={pottery} alt="Pillowcases" className='object-cover rounded-lg border-x-8 mt-4 border-slate-100'/>
             </div>
