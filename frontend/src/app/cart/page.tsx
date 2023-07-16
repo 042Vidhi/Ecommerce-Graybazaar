@@ -3,18 +3,21 @@ import React from 'react';
 import {Heading,Highlight} from '@chakra-ui/react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from 'react-redux';
-import { useAppDispatch } from '@/redux/hook';
-import { removeFromCart } from '@/redux/cartSlice';
+import CartCard from '@/components/CartCard';
 
 export default function page() {
 
   const {cartItems} = useSelector((state:any) => state.cart);
-  const dispatch = useAppDispatch();
+  
 
+  let sum = 0;
+  cartItems.forEach((item:any) => {
+    sum += parseFloat(item.price);
+  });
 
   return (
     <>
-    <div className='h-screen'>
+    <div className=''>
     <Heading lineHeight='tall' className='text-slate-700 md:text-5xl text-base/loose font-semibold text-center p-4 '>
             <Highlight   
                 query={['Cart']}
@@ -27,31 +30,29 @@ export default function page() {
         {cartItems.length === 0 ? 
         <div className='text-slate-700 text-center'>Cart is Empty</div>
         :
-    <table className="table-auto w-full ">
-      <thead>
-        <tr >
-          <th className="py-2 text-slate-700 border-[1px] border-slate-400">Product</th>
-          <th className="py-2 text-slate-700 border-[1px] border-slate-400">Price</th>
-          <th className="py-2 text-slate-700 border-[1px] border-slate-400">Remove</th>
-        </tr>
-      </thead>
-      <tbody className='text-center'>
-        
-          {cartItems.map((item:any,i:any) => (
-            <tr key={i}>
-              <td className='text-slate-600 py-2' >{item.id}:{item.name}</td>
-              <td className='text-slate-600 py-2'>{item.price}</td>
-              <td className='text-slate-600 py-2'><DeleteIcon className='cursor-pointer'
-              onClick={()=>dispatch(removeFromCart({id:item.id}))}
-              
-              /></td>
-            </tr>
-          ))}
-      
-      </tbody>
-    </table>
+
+        <div className='flex flex-col'>
+              <div>
+              {cartItems.map((item:any,i:any) => (
+                <CartCard key={i} product={item}/>
+              ))}
+              </div>
+              <div className='flex flex-col  p-2 m-2 lg:m-6  lg:px-4 bg-blue-100  rounded-md'>
+                <div className='flex justify-between'>
+                  <p className='text-slate-900 font-semibold  text-xl'>Total</p>
+                  <p className='font-bold text-black text-xl'>Rs.{sum}</p>
+                </div>
+                <div className='flex flex-col items-center justify-center'>
+                  <p className='text-slate-600 text-sm'>Inclusive of all Taxes</p>
+                  <button className='w-full bg-black text-white p-[4px] md:px-4 md:py-2 rounded-md'>Checkout</button>
+                </div>
+              </div>
+       </div>
+
+
+     
         }
-    </div>
+        </div>
     </>
   )
 }

@@ -9,3 +9,5 @@ urlpatterns = [
     path("products/<str:pk>/update/", views.updateProduct),
     # path("filter/products/", views.ProductsList.as_view()),  # Add this line for filtered products
 ]
+
+

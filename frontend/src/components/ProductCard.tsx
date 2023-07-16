@@ -8,12 +8,13 @@ import { addToWishList } from '@/redux/wishListSlice';
 
 export default function ProductCard({product}:any) {
 
+  
   const dispatch = useAppDispatch();
   return (
     <div className=' bg-blue-100 p-4 rounded-lg m-2'>
+
         <div className="productcard flex flex-col justify-between items-center ">
-            
-            <Image src={candles} alt="Logo" className='rounded-lg cursor-pointer' 
+            <Image src={candles} alt="Picture" className='rounded-lg cursor-pointer' 
             onClick={()=>{window.location.href=`/products/${product?.id}`}}
             />
             

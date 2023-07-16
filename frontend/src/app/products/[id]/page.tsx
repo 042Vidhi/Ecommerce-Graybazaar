@@ -4,7 +4,7 @@ import Image from 'next/image';
 import candles from '../../../../public/candles.jpg';
 import { useAppDispatch } from '@/redux/hook';
 import { addToCart } from '@/redux/cartSlice';
-
+import { addToWishList } from '@/redux/wishListSlice';
 import axios from 'axios';
 import { useEffect } from 'react';
 
@@ -40,7 +40,9 @@ export default function Page({params :{id}}: Params) {
          {product?.description}
         </p>
         <div className="productcard-button w-full h-10 gap-2 rounded-md flex justify-center items-center">
-          <button className="button bg-blue-300 rounded-lg w-1/2 py-2">Favourite</button>
+          <button className="button bg-blue-300 rounded-lg w-1/2 py-2"
+          onClick={() => dispatch(addToWishList(product))}
+          >Favourite</button>
           <button
             className="button bg-slate-800 rounded-lg w-1/2 py-2"
             onClick={() => dispatch(addToCart(product))}
